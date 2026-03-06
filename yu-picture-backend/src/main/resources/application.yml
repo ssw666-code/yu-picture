@@ -1,0 +1,77 @@
+server:
+  # 端口号
+  port: 9096
+  # 接口路径
+  servlet:
+    # 上下文路径
+    context-path: /api
+
+spring:
+  application:
+    # 项目名称
+    name: yu-picture-backend
+  # 数据库配置
+  datasource:
+    # 配置驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接地址
+    url: jdbc:mysql://localhost:3306/yu_picture
+    # 用户名
+    username: root
+    # 密码
+    password: 123456
+
+  #redis配置
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    timeout: 5000
+
+  # 开放更大的文件上传体积
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+
+mybatis-plus:
+  configuration:
+    # MyBatis 配置（转驼峰命名）
+    map-underscore-to-camel-case: false
+    # 仅在开发环境打印日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 逻辑删除
+      logic-delete-field: isDeleted
+      # 为1时为删除状态
+      logic-delete-value: 1
+      # 为0时为未删除状态
+      logic-not-delete-value: 0
+
+# 接口文档配置
+knife4j:
+  # 是否开启
+  enable: true
+  openapi:
+    # 标题名称
+    title: 接口文档
+    version: v1.0
+    group:
+      # 分组
+      default:
+        # 分组规则
+        api-rule: package
+        # 扫描的包
+        api-rule-resources:
+          - com.yupi.yupicturebackend.controller
+
+# 对象存储配置（需要从通讯云获取）
+#cos:
+#  client:
+#    host: xxx
+#    secretId: xxx
+#    secretKey: xxx
+#    region: xxx
+#    bucket: xxx
